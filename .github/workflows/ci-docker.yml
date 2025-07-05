@@ -3,9 +3,16 @@ name: CI & Docker Publish
 # Запускаем на пуш в main и при добавлении тегов вида v*
 on:
   push:
-    branches: ["main"]
+    # на пуш в любую ветку запускаем test
+    branches:
+      - "**"
+    # по тегам
     tags:
-      - 'v*'
+      - "v*"
+  pull_request:
+    # чтобы при открытии/обновлении PR тоже проверяло
+    branches:
+      - "**"
 
 jobs:
   test:
